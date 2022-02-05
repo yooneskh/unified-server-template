@@ -1,6 +1,7 @@
 # disable selinux
 # setup firewall
 # install micro
+# install httpie
 
 
 export DENO_INSTALL=$HOME/.deno
