@@ -1,0 +1,6 @@
+{
+  admin off
+  email yooneskh@gmail.com
+}
+
+import conf.d/*.caddy

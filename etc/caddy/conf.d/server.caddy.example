@@ -1,0 +1,11 @@
+domain.com {
+
+  @media path /media/*
+  @api not path /media/*
+
+  reverse_proxy @api localhost:8080
+
+  root @media /home/yooneskh/project/
+  file_server
+
+}

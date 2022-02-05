@@ -1,0 +1,31 @@
+. ~/.bash_profile
+
+
+project="$1"
+type="$2"
+
+
+git --work-tree="/home/yooneskh/$project/" --git-dir="/home/yooneskh/$project/.git" checkout -f
+
+cd /home/yooneskh/$project
+
+
+if [ "$type" == "ts-server" ]; then
+  yarn
+  yarn build
+fi
+
+if [ "$type" == "js-server" ]; then
+  yarn
+fi
+
+if [ "$type" == "js-server-npm" ]; then
+  npm install
+fi
+
+if [ "$type" == "deno-server" ]; then
+  echo "deno server does not have additional commands"
+fi
+
+
+pm2 restart --update-env $project
