@@ -1,0 +1,47 @@
+# disable selinux
+
+# dnf install firewalld
+# systemctl start firewalld
+# systemctl enable firewalld
+# firewall-cmd --zone=public --add-service=http --permanent
+# firewall-cmd --zone=public --add-service=https --permanent
+# firewall-cmd --reload
+
+# dnf copr enable @caddy/caddy
+# dnf install caddy
+# systemctl start caddy
+# systemctl enable caddy
+
+# dnf install epel-release
+# dnf install httpie
+
+# curl https://getmic.ro | bash
+# mv micro /bin/mi
+
+# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+# npm i -g zx
+# npm i -g pm2
+
+# curl -fsSL https://deno.land/x/install/install.sh | sh
+
+
+export DENO_INSTALL=$HOME/.deno
+export PATH=$PATH:$DENO_INSTALL/bin
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+function c { clear; }
+
+function cc { cd /home/yooneskh/; }
+function cv { cd /etc/caddy/conf.d/; }
+function pla { pm2 logs all; }
+function pls { pm2 ls; }
+
+function sr { systemctl restart $1; }
+function ju { journalctl -u $1 -f; }
+function srju { sr $1 && ju $1; }
+function srjuc { srju caddy; }
