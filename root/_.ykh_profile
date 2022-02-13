@@ -12,8 +12,12 @@
 # systemctl start caddy
 # systemctl enable caddy
 
-# dnf install epel-release
-# dnf install httpie
+# dnf install python3.9
+# python -m pip install --upgrade pip wheel
+# python -m pip install httpie
+
+alias python=python3.9
+
 
 # curl https://getmic.ro | bash
 # mv micro /bin/mi
@@ -22,16 +26,15 @@
 # npm i -g zx
 # npm i -g pm2
 
-# curl -fsSL https://deno.land/x/install/install.sh | sh
-
-
-export DENO_INSTALL=$HOME/.deno
-export PATH=$PATH:$DENO_INSTALL/bin
-
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# curl -fsSL https://deno.land/x/install/install.sh | sh
+
+export DENO_INSTALL=$HOME/.deno
+export PATH=$PATH:$DENO_INSTALL/bin
 
 
 function c { clear; }
