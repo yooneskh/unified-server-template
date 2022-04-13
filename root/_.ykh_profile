@@ -37,6 +37,9 @@ export DENO_INSTALL=$HOME/.deno
 export PATH=$PATH:$DENO_INSTALL/bin
 
 
+$ install mongodb
+
+
 function c { clear; }
 
 function cc { cd /home/yooneskh/; }
