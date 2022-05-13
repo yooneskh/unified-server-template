@@ -3,7 +3,21 @@ http://domain.com, http://www.domain.com, https://www.domain.com {
 }
 
 domain.com {
+
   root * /home/yooneskh/project/
   file_server
   try_files {path} /
+
+  encode zstd gzip
+
+  header {
+    Cache-Control "max-age=31536000"
+    Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    X-Frame-Options "SAMEORIGIN"
+    X-Content-Type-Options "nosniff"
+    Referrer-Policy "no-referrer"
+    Permissions-Policy ""
+    -Server
+  }
+
 }
