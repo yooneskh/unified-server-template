@@ -24,7 +24,12 @@ if [ "$type" == "js-server-npm" ]; then
 fi
 
 if [ "$type" == "deno-server" ]; then
-  echo "deno server does not have additional commands"
+  deno check bootstrap.ts
+fi
+
+if [ "$type" == "nuxt-server" ]; then
+  yarn
+  yarn build
 fi
 
 

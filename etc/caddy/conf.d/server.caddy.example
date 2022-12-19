@@ -1,9 +1,26 @@
 domain.com {
 
+  @options {
+    method OPTIONS
+  }
+
+  respond @options "OK" 200
+
+
   @media path /media/*
   @api not path /media/*
 
   reverse_proxy @api localhost:8080
+
+  encode zstd gzip
+
+
+  header {
+    Access-Control-Allow-Origin *
+    Access-Control-Allow-Methods *
+    Access-Control-Allow-Headers *
+  }
+
 
   root @media /home/yooneskh/project/
   file_server
