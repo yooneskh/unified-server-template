@@ -1,14 +1,54 @@
-http://domain.com, http://www.domain.com, https://www.domain.com {
-  redir https://domain.com{uri} permanent
+http://{{service.domain}}, http://www.{{service.domain}}, https://www.{{service.domain}} {
+  redir https://{{service.domain}}{uri} permanent
 }
 
-domain.com {
 
-  root * /home/yooneskh/project/
-  file_server
-  try_files {path} /
+{{service.domain}} {
+
+  @options {
+    method OPTIONS
+  }
+
+  respond @options "OK" 200
+
 
   encode zstd gzip
+
+
+  @api not path /media/*
+  reverse_proxy @api localhost:{{service.port}}
+
+  header @api {
+    Access-Control-Allow-Origin *
+    Access-Control-Allow-Methods *
+    Access-Control-Allow-Headers *
+  }
+
+
+  @media path /media/*
+
+  root @media /home/yooneskh/{{service.dir}}/
+  file_server
+
+  header @media {
+    Cache-Control "max-age=5184000"
+  }
+
+
+
+  @cacheable {
+    path *.css *.js *.woff2 *.png *.ico *.jpg *.jpeg
+  }
+
+  header @cacheable {
+    Cache-Control "max-age=5184000"
+  }
+
+
+
+  root * /home/yooneskh/{{service.dir}}/
+  file_server
+  try_files {path} /
 
   header {
     Cache-Control "max-age=31536000"
