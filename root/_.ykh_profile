@@ -1,30 +1,22 @@
-# disable selinux
+# ufw allow ssh
+# ufw allow http
+# ufw allow https
+# ufw enable
 
-# dnf install firewalld
-# systemctl start firewalld
-# systemctl enable firewalld
-# firewall-cmd --zone=public --add-service=http --permanent
-# firewall-cmd --zone=public --add-service=https --permanent
-# firewall-cmd --reload
-
-# dnf copr enable @caddy/caddy
-# dnf install caddy
-# systemctl start caddy
-# systemctl enable caddy
-
-# dnf install python3.9
-# python -m pip install --upgrade pip wheel
-# python -m pip install httpie
-
-alias python=python3.9
+# sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https
+# curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+# curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+# sudo apt update
+# sudo apt install caddy
 
 
 # curl https://getmic.ro | bash
 # mv micro /bin/mi
 
 # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-# npm i -g zx
+# npm i -g yarn
 # npm i -g pm2
+# npm i -g zx
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -40,9 +32,11 @@ export PATH=$PATH:$DENO_INSTALL/bin
 $ install mongodb
 
 
+export y="/home/yooneskh"
+
 function c { clear; }
 
-function cc { cd /home/yooneskh/; }
+function cc { cd $y/; }
 function cv { cd /etc/caddy/conf.d/; }
 function pla { pm2 logs all; }
 function pls { pm2 ls; }

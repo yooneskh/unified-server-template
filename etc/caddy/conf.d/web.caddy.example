@@ -16,6 +16,9 @@ http://{{service.domain}}, http://www.{{service.domain}}, https://www.{{service.
 
 
   @api not path /media/*
+  @media path /media/*
+
+
   reverse_proxy @api localhost:{{service.port}}
 
   header @api {
@@ -24,8 +27,6 @@ http://{{service.domain}}, http://www.{{service.domain}}, https://www.{{service.
     Access-Control-Allow-Headers *
   }
 
-
-  @media path /media/*
 
   root @media /home/yooneskh/{{service.dir}}/
   file_server

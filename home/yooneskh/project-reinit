@@ -1,4 +1,4 @@
-. ~/.bash_profile
+. ~/.bashrc
 
 
 project="$1"
@@ -11,26 +11,21 @@ cd /home/yooneskh/$project
 
 
 if [ "$type" == "ts-server" ]; then
-  yarn
-  yarn build
+  yarn && yarn build && pm2 restart --update-env $project
 fi
 
 if [ "$type" == "js-server" ]; then
-  yarn
+  yarn && pm2 restart --update-env $project
 fi
 
 if [ "$type" == "js-server-npm" ]; then
-  npm install
+  npm install && pm2 restart --update-env $project
 fi
 
 if [ "$type" == "deno-server" ]; then
-  deno check bootstrap.ts
+  deno cache bootstrap.ts && deno check bootstrap.ts && pm2 restart --update-env $project
 fi
 
 if [ "$type" == "nuxt-server" ]; then
-  yarn
-  yarn build
+  yarn && yarn build && pm2 restart --update-env $project
 fi
-
-
-pm2 restart --update-env $project
