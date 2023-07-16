@@ -1,3 +1,2 @@
-
-# add this line
-. ~/.ykh_profile
+# add this line in the first line
+source ~/.ykh_profile

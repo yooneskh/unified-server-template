@@ -1,4 +1,5 @@
-. ~/.bashrc
+#!/bin/bash
+source ~/.bashrc
 
 
 project="$1"
@@ -24,6 +25,10 @@ fi
 
 if [ "$type" == "deno-server" ]; then
   deno cache bootstrap.ts && deno check bootstrap.ts && pm2 restart --update-env $project
+fi
+
+if [ "$type" == "deno-js-server" ]; then
+  deno cache bootstrap.js && deno check bootstrap.js && pm2 restart --update-env $project
 fi
 
 if [ "$type" == "nuxt-server" ]; then
