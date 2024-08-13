@@ -11,13 +11,10 @@ http://{{service.domain}}, http://www.{{service.domain}}, https://www.{{service.
 
   respond @options "OK" 200
 
-
   encode zstd gzip
-
 
   @api not path /media/*
   @media path /media/*
-
 
   reverse_proxy @api localhost:{{service.port}}
 
@@ -26,7 +23,6 @@ http://{{service.domain}}, http://www.{{service.domain}}, https://www.{{service.
     Access-Control-Allow-Methods *
     Access-Control-Allow-Headers *
   }
-
 
   root @media /home/yooneskh/{{service.dir}}/
   file_server
@@ -44,8 +40,6 @@ http://{{service.domain}}, http://www.{{service.domain}}, https://www.{{service.
   header @cacheable {
     Cache-Control "max-age=5184000"
   }
-
-
 
   root * /home/yooneskh/{{service.dir}}/
   file_server
