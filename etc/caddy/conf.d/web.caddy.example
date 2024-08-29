@@ -1,58 +1,65 @@
-http://{{service.domain}}, http://www.{{service.domain}}, https://www.{{service.domain}} {
+http://{{service.domain}} {
   redir https://{{service.domain}}{uri} permanent
 }
 
 
 {{service.domain}} {
 
-  @options {
-    method OPTIONS
-  }
-
-  respond @options "OK" 200
-
   encode zstd gzip
 
-  @api not path /media/*
-  @media path /media/*
+  handler /media/* {
 
-  reverse_proxy @api localhost:{{service.port}}
+    root /home/yooneskh/{{service.backendDir}}/
+    file_server
 
-  header @api {
-    Access-Control-Allow-Origin *
-    Access-Control-Allow-Methods *
-    Access-Control-Allow-Headers *
+    header {
+      Cache-Contorol "max-age=5184000"
+      -Server
+    }
+
   }
 
-  root @media /home/yooneskh/{{service.dir}}/
-  file_server
+  handler /api/* {
 
-  header @media {
-    Cache-Control "max-age=5184000"
+    @options {
+      method OPTIONS
+    }
+
+    respond @options "OK" 200
+
+    header {
+      Access-Control-Allow-Origin *
+      Access-Control-Allow-Methods *
+      Access-Control-Allow-Headers *
+      -Server
+    }
+
+    reverse_proxy localhost:{{service.backendPort}}
+  	
   }
 
+  handler {
 
+    @cacheable {
+      path *.css *.js *.woff2 *.png *.ico *.jpg *.jpeg
+    }
 
-  @cacheable {
-    path *.css *.js *.woff2 *.png *.ico *.jpg *.jpeg
-  }
+    header @cacheable {
+      Cache-Control "max-age=5184000"
+    }
 
-  header @cacheable {
-    Cache-Control "max-age=5184000"
-  }
+    reverse_proxy localhost:{{service.frontendPort}}
 
-  root * /home/yooneskh/{{service.dir}}/
-  file_server
-  try_files {path} /
+    header {
+      Cache-Control "max-age=31536000"
+      Strict-Transport-Security "max-age=31536000; includeSubDomains"
+      X-Frame-Options "SAMEORIGIN"
+      X-Content-Type-Options "nosniff"
+      Referrer-Policy "no-referrer"
+      Permissions-Policy ""
+      -Server
+    }
 
-  header {
-    Cache-Control "max-age=31536000"
-    Strict-Transport-Security "max-age=31536000; includeSubDomains"
-    X-Frame-Options "SAMEORIGIN"
-    X-Content-Type-Options "nosniff"
-    Referrer-Policy "no-referrer"
-    Permissions-Policy ""
-    -Server
   }
 
 }
