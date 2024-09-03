@@ -51,7 +51,6 @@ http://{{service.domain}} {
     reverse_proxy localhost:{{service.frontendPort}}
 
     header {
-      Cache-Control "max-age=31536000"
       Strict-Transport-Security "max-age=31536000; includeSubDomains"
       X-Frame-Options "SAMEORIGIN"
       X-Content-Type-Options "nosniff"
