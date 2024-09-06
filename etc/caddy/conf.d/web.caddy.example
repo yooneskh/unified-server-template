@@ -7,9 +7,9 @@ http://{{service.domain}} {
 
   encode zstd gzip
 
-  handler /media/* {
+  handle /media/* {
 
-    root /home/yooneskh/{{service.backendDir}}/
+    root /home/yooneskh/{{service.id}}/backend/
     file_server
 
     header {
@@ -19,7 +19,7 @@ http://{{service.domain}} {
 
   }
 
-  handler /api/* {
+  handle /api/* {
 
     @options {
       method OPTIONS
@@ -38,10 +38,10 @@ http://{{service.domain}} {
   	
   }
 
-  handler {
+  handle {
 
     @cacheable {
-      path *.css *.js *.woff2 *.png *.ico *.jpg *.jpeg
+      path *.css *.js *.woff2 *.png *.ico *.jpg *.jpeg *.woff *.json
     }
 
     header @cacheable {
